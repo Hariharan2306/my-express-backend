@@ -19,7 +19,7 @@ const userLoginController = async (req, res) => {
         .status(401)
         .json({ flag: "error", message: "Invalid password" });
     }
-    res.status(200).json({ flag: "success" });
+    res.status(200).json({ flag: "success", message: "Successfully logedin" });
   } catch (error) {
     res.status(500).json({ flag: "error", error: error.message });
   }
