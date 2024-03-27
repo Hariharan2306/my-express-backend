@@ -4,6 +4,7 @@ const landingPageRouter = require("./routers/landingPageRouter.js");
 
 // Define routes
 router.use("/access-approval", landingPageRouter);
+router.use("/driver", driverPageRouter);
 
 // Export the router
 // module.exports = router;
