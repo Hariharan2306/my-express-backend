@@ -26,4 +26,13 @@ const updateImage = async (req, res) => {
   }
 };
 
-module.exports = { getSystems, updateImage };
+const getAppImages = async (req, res) => {
+  try {
+    const images = await myBuss.find();
+    res.status(200).json({ flag: "success", data: images });
+  } catch (error) {
+    res.status(500).json({ flag: "error", error: error.message });
+  }
+};
+
+module.exports = { getSystems, updateImage, getAppImages };
