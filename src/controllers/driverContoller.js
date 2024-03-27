@@ -1,4 +1,4 @@
-const { createDriverService } = require("./createDriverService");
+const { createDriverService } = require("../services/createDriverService");
 
 const createDriversController = async (req, res) => {
   try {
