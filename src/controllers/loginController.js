@@ -9,8 +9,8 @@ const User = mongoose.model("users", userSchema);
 
 const userLoginController = async (req, res) => {
   try {
-    const { userId, password } = req.body;
-    const user = await User.findOne({ userId });
+    const { emailId, password } = req.body;
+    const user = await User.findOne({ emailId });
     if (!user) {
       return res.status(401).json({ flag: "error", message: "User not found" });
     }
