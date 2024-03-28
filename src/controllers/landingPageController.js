@@ -8,7 +8,16 @@ const myBussSchema = new mongoose.Schema({
   rating: { type: String },
 });
 
+const mechanicsSchema = new mongoose.Schema({
+  name: { type: String },
+  age: { type: String },
+  sex: { type: String },
+  shop: { type: String },
+  experience: { type: String },
+});
+
 const myBuss = mongoose.model("myBuss", myBussSchema);
+const mechanics = mongoose.model("mechanics", mechanicsSchema);
 
 const getSystems = async (req, res) => {
   try {
@@ -43,4 +52,35 @@ const getAppImages = async (req, res) => {
   }
 };
 
-module.exports = { getSystems, updateImage, getAppImages };
+const getAllMechanics = async (req, res) => {
+  try {
+    const mechanicsData = await mechanics.find({});
+    res.status(200).json({ flag: "success", data: mechanicsData });
+  } catch (error) {
+    res.status(500).json({ flag: "error", error: error.message });
+  }
+};
+
+const createMechanic = async (req, res) => {
+  try {
+    const { age, area, experience, mechanicName, sex } = req.body;
+    const mechanicsData = await mechanics.create({
+      name: mechanicName,
+      age,
+      sex,
+      shop: area,
+      experience,
+    });
+    res.status(200).json({ flag: "success", data: "success" });
+  } catch (error) {
+    res.status(500).json({ flag: "error", error: error.message });
+  }
+};
+
+module.exports = {
+  getSystems,
+  updateImage,
+  getAppImages,
+  getAllMechanics,
+  createMechanic,
+};
