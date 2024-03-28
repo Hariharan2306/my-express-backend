@@ -7,7 +7,18 @@ const userSchema = new mongoose.Schema({
   sex: { type: String, required: true },
 });
 
+const onBoardedDriversSchema = new mongoose.Schema({
+  busBuddyId: { type: String },
+  travelDate: { type: String },
+  busId: { type: String },
+  boardingPoint: { type: String },
+});
+
 const driversCollection = mongoose.model("drivers", userSchema);
+const onBoardedDriversCollection = mongoose.model(
+  "on_boarded_drivers",
+  onBoardedDriversSchema
+);
 
 const createDriverService = async ({ name, age, phone, sex }) => {
   try {
@@ -28,4 +39,27 @@ const fetchDriversService = async () => {
   }
 };
 
-module.exports = { createDriverService, fetchDriversService };
+const onBoardDriverService = async ({
+  busBuddyId,
+  travelDate,
+  busId,
+  boardingPoint,
+}) => {
+  try {
+    await onBoardedDriversCollection.create({
+      busBuddyId,
+      travelDate,
+      busId,
+      boardingPoint,
+    });
+    return { flag: "success" };
+  } catch (error) {
+    return { flag: "error", error: error.message };
+  }
+};
+
+module.exports = {
+  createDriverService,
+  fetchDriversService,
+  onBoardDriverService,
+};
